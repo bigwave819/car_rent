@@ -1,0 +1,31 @@
+.home{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../public/carone.webp");
+    background-position: center;
+    background-size: cover;
+}
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+  }
+  .btn-custom {
+    background-color: #007bff;
+    color: #0d0c0c;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+  }
+  .nav{
+    background-color: #1e205f;
+  }
+  .image1{
+    height: 400px;
+    width: 400px;
+  }
