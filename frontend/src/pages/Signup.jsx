@@ -1,65 +1,51 @@
-import "./signup.css"
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { useSignup } from '../hooks/useSignup';
 
-const SignUp = () => {
-    const navigate = useNavigate();
+const SignupForm = () => {
+  const { signup, isLoading, error } = useSignup();
+  const [form, setForm] = useState({ username: '', email: '', password: '' });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await signup(form.username, form.email, form.password);
+  };
+
   return (
-    <div
-      style={{
-        background: "#080124",
-      }}
-    >
-      <div className="signup_container">
-        <div className="signup_form_container">
-          <div className="left">
-            <h1 fontSize={{ base: "1.3rem", md: "1.6rem" }}>Welcome!</h1>
-            <button
-              type="button"
-              className="white_btn"
-              onClick={() => navigate("/login")}
-            >
-              Sign in
-            </button>
-          </div>
-          <div className="right">
-            <form className="form_container">
-              <h2 color="#1c024e" fontFamily="poppins">
-                Create Account
-              </h2>
-              <input
-                type="text"
-                placeholder="Name"
-                name="name"
-                className="input"
-              />
-              <input
-                type="text"
-                placeholder="Email"
-                name="email"
-                className="input"
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                name="password"
-                className="input"
-              />
-              <input
-                type="password"
-                placeholder="Confirm Password"
-                name="ConfirmPassword"
-                className="input"
-              />
-
-              <button type="submit" className="green_btn">
-                Sign Up
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        name="username"
+        placeholder="Username"
+        value={form.username}
+        onChange={handleChange}
+        required
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="Email"
+        value={form.email}
+        onChange={handleChange}
+        required
+      />
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        value={form.password}
+        onChange={handleChange}
+        required
+      />
+      <button type="submit" disabled={isLoading}>
+        {isLoading ? 'Signing up...' : 'Sign up'}
+      </button>
+      {error && <div className="error">{error}</div>}
+    </form>
   );
 };
 
-export default SignUp;
+export default SignupForm;

@@ -1,4 +1,5 @@
 {
+  "proxy": "http://localhost:4000/",
   "name": "frontend",
   "private": true,
   "version": "0.0.0",
@@ -10,7 +11,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@chakra-ui/react": "^3.2.4",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
     "bootstrap": "^5.3.3",
+    "framer-motion": "^11.15.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icon": "^1.0.0",

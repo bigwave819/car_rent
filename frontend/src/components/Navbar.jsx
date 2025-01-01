@@ -1,16 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./hello.css"
+import { useAuthContext } from "../hooks/useAuthContext";
+import { useLogout } from '../hooks/useLogout'
+import "./hello.css";
 
 const Navbar = () => {
+  const { user } = useAuthContext();
+  const { logout } = useLogout()
+  const handleClick = () => {
+    logout()
+  }
   return (
     <div>
       <nav className="navbar navbar-expand-lg nav">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
-          <h2 className="text-light">
-            Carrent
-          </h2>
+            <h2 className="text-light">Carrent</h2>
           </Link>
           <button
             className="navbar-toggler"
@@ -26,12 +31,16 @@ const Navbar = () => {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <Link className="nav-link active text-light" aria-current="page" to="/">
+                <Link
+                  className="nav-link active text-light"
+                  aria-current="page"
+                  to="/"
+                >
                   About
                 </Link>
               </li>
               <li clasNames="nav-item">
-                <Link className="nav-link text-light" href="#">
+                <Link className="nav-link text-light" to="/">
                   Services
                 </Link>
               </li>
@@ -45,16 +54,25 @@ const Navbar = () => {
                   Help
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="btn btn-primary" to="/">
-                  Login
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="btn btn-outline-primary" to="/">
-                  Register
-                </Link>
-              </li>
+              {!user && (
+                <div>
+                  {" "}
+                  <li className="nav-item">
+                    <Link className="btn btn-primary" to="/">
+                      Login
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="btn btn-outline-primary" to="/">
+                      Register
+                    </Link>
+                  </li>{" "}
+                </div>
+              )}
+              { user && <div>
+              <span>{user.email}</span>
+              <button onClick={handleClick}>Log out</button>
+            </div> }
             </ul>
           </div>
         </div>

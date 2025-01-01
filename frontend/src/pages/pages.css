@@ -200,3 +200,11 @@ body {
       padding: 22px;
     }
   }
+  .btn-custom {
+    background-color: #00b7ff;
+    color: #0d0c0c;
+    padding: 7px 50px 7px 50px;
+    border: none;
+    font-size: 18px;
+    border-radius: 30px;
+  }
